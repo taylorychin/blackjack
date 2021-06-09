@@ -12,15 +12,9 @@ const masterDeck = buildMasterDeck();
 best stage : blocks betting once deal is clicked.
 first move ( blocks double down, )
 */
-gameStage; //modulus operater this to decide where what step the game is on?
+var gameStage; //modulus operater this to decide where what step the game is on?
 var funds;
 var bet;
-
-var testVar1;
-var TestVar2;
-var testVar3;
-
-
 
 
 /*----- cached element references -----*/
@@ -29,7 +23,7 @@ var deck = [];
 var dealerHand = [];
 var playerHand = [];
 var totalMoney;
-
+messageBox = document.getElementById('message');
 //player's hand
 //dealer's hand
 //bet total
@@ -38,15 +32,95 @@ var totalMoney;
 
 /*----- event listeners -----*/
 //button click listeners for deal, chips, hold, hit, x2down, etc.
-document.querySelector('button').addEventListener('click', handleButtons);
+document.addEventListener("click", handleButtons);
 
 /*----- functions -----*/
 //setup or reset the game.
 function init() {
+    bet = 0;
+    deck = masterDeck;
+    shuffle(deck);
+    playerHand.length = 0;
+    dealerHand.length = 0;
+    pHandTable = document.getElementById("pHand");
+    dHandTable = document.getElementById("dHand");
+    messageBox.style.visibility = 'hidden';
 
+    // disableButtons(['hit', 'stay']);
+
+    gameStage = 0;
+    render();
+
+    // document.getElementById('x2').disabled = true;
+    // document.getElementById('hit').disabled = true;
+    // document.getElementById('stay').disabled = true;
+
+    // document.getElementById('bet5').disabled = true;
+    // document.getElementById('bet10').disabled = true;
+    // document.getElementById('bet50').disabled = true;
+
+    // document.getElementsByName()
+
+
+}
+function disableButtons(buttons) {
+    buttons.forEach(function (b) {
+        test = document.getElementById(b);
+        console.log(test);
+    })
+}
+
+function dealerPlay() {
+    while (checkHand(dealerHand) < 17) {
+        //setTimeout(() => { hit(dealerHand); }, 2000);
+        hit(dealerHand);
+
+        update(`player current score: ${checkHand(playerHand)} dealer score: ${checkHand(playerHand)}`);
+    }
+}
+
+function handleButtons(evt) {
+    if (evt.target.name === 'deal') {
+        init();
+        hit(dealerHand);
+        dealerHand.push()
+        dealerHand.push()
+        hit(playerHand);
+        hit(playerHand);
+        score = checkHand(playerHand);
+        messageBox.style.visibility = 'visible'
+        update(`player current score: ${score}`)
+        if (score === 21) {
+            update("BLACK JACK! you win!");
+        }
+    }
+
+    if (evt.target.name === 'hit') {
+        hit(playerHand);
+        update(`player current score: ${checkHand(playerHand)}`)
+    }
+    if (evt.target.name === 'stay') {
+        gameStage++;
+        dealerPlay();
+        console.log(checkHand(playerHand));
+        console.log(didWin());
+        console.log(`dealer score: ${checkHand(dealerHand)}  your score ${checkHand(playerHand)}`)
+
+    }
+
+    render();
+}
+
+function update(message) {
+    messageBox.textContent = message;
 }
 //=============================================
 function render() {
+    //  renderDeckInContainer(dealerHand, );
+    renderDeckInContainer(playerHand, pHandTable);
+    renderDeckInContainer(dealerHand, dHandTable);
+    // if ((gameStage % 3) !== 0) {
+    // }
 
 }
 
@@ -60,9 +134,27 @@ function didWin() {
     dScore = checkHand(dealerHand);
     pScore = checkHand(playerHand);
 
-    if ((pScore > dScore) && (pScore < 22)) return true;
-    else if (dScore > 21) return true;
-    else return false;
+    if ((pScore > dScore) && (pScore < 22)) {
+        update(` YOU WIN \n player score: ${pScore} dealer score: ${dScore}`);
+        return 1;
+    }
+    else if ((dScore > 21) && (pScore < 21)) {
+        update(` Dealer Busts. YOU WIN \n player score: ${pScore} dealer score: ${dScore}`);
+        return 1;
+    }
+
+    else if (dScore > pScore) {
+        update(` Dealer wins. \n player score: ${pScore} dealer score: ${dScore}`);
+        return -1;
+    }
+    else if (pScore > 21) {
+        update(` BUST \n player score: ${pScore} dealer score: ${dScore}`);
+        return -1;
+    }
+    else if ((pScore === dScore) && (pScore < 21)) {
+        return 0;
+    }
+
 
 }
 
@@ -78,6 +170,7 @@ function renderDeckInContainer(deck, container) {
     // const cardsHtml = deck.reduce(function(html, card) {
     //   return html + `<div class="card ${card.face}"></div>`;
     // }, '');
+    //cardsHtml += `<div class="card ${'back'}"></div>`;
     container.innerHTML = cardsHtml;
 }
 
@@ -116,7 +209,7 @@ function checkHand(hand) {
     return score;
 }
 //=================================================
-//pass in hand 
+//pass in hand array
 function hit(hand) {
     let card = deck.pop();
     hand.push(card);
@@ -127,7 +220,7 @@ function hit(hand) {
 function shuffle(deck) {
     for (x = 0; x < 10; x++) {
         deck.forEach(function (card, index) {
-            let rNum = Math.floor(Math.Random() * 51);
+            let rNum = Math.floor(Math.random() * 51);
             let temp = deck[rNum];
             deck[rNum] = deck[index];
             deck[index] = temp;
@@ -136,3 +229,6 @@ function shuffle(deck) {
 
 }
 
+
+//=========run the game===========================
+init();

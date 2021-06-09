@@ -6,41 +6,51 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="css/card-deck-css/css/cardstarter.css" rel="stylesheet" />
+    <link href="css/main.css" rel="stylesheet" />
     <script defer src="js/main.js"></script>
 </head>
 
 <body>
-    <table id="dealer" class="table">
+    <table id="dealerTable" class="table">
         <!-- Dealer's hand-->
         <thead>
             <tr>Dealer</tr>
         </thead>
-        <tr>
+        <tr id="dHand">
 
         </tr>
 
     </table>
-
-    <table id="buttons" class="button-table">
+    <br>
+    <table id="gameButtons" class="button-table">
         <tr>
             <!--buttons go here. some need to disappear when clicked. left side action buttons-->
-            <button class="X2">DOUBLE DOWN</button>
-            <button class="hit">HIT</button>
-            <button class="stay">STAY</button>
+            <button class="button" id="gameButton" name="deal">DEAL</button>
+            <button class="button" id="gameButton" name="x2">DOUBLE DOWN</button>
+            <button class="button" id="gameButton" name="hit">HIT</button>
+            <button class="button" id="gameButton" name="stay">STAY</button>
         </tr>
     </table>
 
-    <table id="bettingButtons" class="buttonTable"></table>
-    <button class="bet5"> $5 </button>
-    <button class="bet10"> $10 </button>
-    <button class="allIn"> ALL IN</button>
+    <table id="betButtons" class="buttonTable"></table>
+    <button class="button" id="bet5"> $5 </button>
+    <button class="button" id="bet10"> $10 </button>
+    <button class="button" id="bet50"> $50</button>
+    <button class="button" id="setBet"> BET</button>
 
-    <table id="hand" class="table">
+    <br>
+    <p id='message'> you cant see me</p>
+
+    <table id="playerTable" class="table">
         <!-- player's hand table-->
         <thead>
+
+            <br>
+            <tr id="money"></tr>
             <tr>Your Hand</tr>
         </thead>
-        <tr>
+        <tr id="pHand">
 
         </tr>
 
