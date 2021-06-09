@@ -46,7 +46,7 @@ function init() {
     dHandTable = document.getElementById("dHand");
     messageBox.style.visibility = 'hidden';
 
-    // disableButtons(['hit', 'stay']);
+    disableButtons(['hit', 'stay']);
 
     gameStage = 0;
     render();
@@ -59,16 +59,25 @@ function init() {
     // document.getElementById('bet10').disabled = true;
     // document.getElementById('bet50').disabled = true;
 
-    // document.getElementsByName()
+    //document.getElementsByName()
 
 
 }
+// function disableButtons(buttons) {
+//     buttons.forEach(function (b) {
+//         test = document.getElementById(b);
+//         console.log(test);
+//     })
+// }
+
 function disableButtons(buttons) {
     buttons.forEach(function (b) {
-        test = document.getElementById(b);
+        //let test = document.getElementById(b);
+        test.setAttribute('disabled', 'true');
         console.log(test);
-    })
+    });
 }
+
 
 function dealerPlay() {
     while (checkHand(dealerHand) < 17) {
