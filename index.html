@@ -26,28 +26,32 @@
     <table id="gameButtons" class="button-table">
         <tr>
             <!--buttons go here. some need to disappear when clicked. left side action buttons-->
-            <button class="button" id="gameButton" name="deal">DEAL</button>
-            <button class="button" id="gameButton" name="x2">DOUBLE DOWN</button>
+            <button class="button" id="deal" name="deal">DEAL</button>
+            <button class="button" id="x2" name="x2">DOUBLE DOWN</button>
             <button class="button" id="hit" name="hit">HIT</button>
             <button class="button" id="stay" name="stay">STAY</button>
         </tr>
     </table>
 
-    <table id="betButtons" class="buttonTable"></table>
-    <button class="button" id="bet5"> $5 </button>
-    <button class="button" id="bet10"> $10 </button>
-    <button class="button" id="bet50"> $50</button>
-    <button class="button" id="setBet"> BET</button>
+    <table id="betButtons" class="buttonTable">
+        <button class="betButton" id="betS" name='bet' data-num="5"> $5 </button>
+        <button class="betButton" id="betM" name='bet' data-num="10"> $10 </button>
+        <button class="betButton" id="betL" name='bet' data-num="50"> $50</button>
+        <button class="button" id="start" name="start"> New Round</button>
+    </table>
+
 
     <br>
     <p id='message'> you cant see me</p>
+    <p id='scoreBoard'>scores kept here</p>
+    <p id='money'>your money goes here</p>
 
     <table id="playerTable" class="table">
         <!-- player's hand table-->
         <thead>
 
             <br>
-            <tr id="money"></tr>
+
             <tr>Your Hand</tr>
         </thead>
         <tr id="pHand">
