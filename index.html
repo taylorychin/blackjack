@@ -12,53 +12,67 @@
 </head>
 
 <body>
-    <table id="dealerTable" class="table">
-        <!-- Dealer's hand-->
-        <thead>
-            <tr>Dealer</tr>
-        </thead>
-        <tr id="dHand">
-
-        </tr>
-
-    </table>
-    <br>
-    <table id="gameButtons" class="button-table">
-        <tr>
-            <!--buttons go here. some need to disappear when clicked. left side action buttons-->
-            <button class="button" id="deal" name="deal">DEAL</button>
-            <button class="button" id="x2" name="x2">DOUBLE DOWN</button>
-            <button class="button" id="hit" name="hit">HIT</button>
-            <button class="button" id="stay" name="stay">STAY</button>
-        </tr>
-    </table>
-
-    <table id="betButtons" class="buttonTable">
-        <button class="betButton" id="betS" name='bet' data-num="5"> $5 </button>
-        <button class="betButton" id="betM" name='bet' data-num="10"> $10 </button>
-        <button class="betButton" id="betL" name='bet' data-num="50"> $50</button>
-        <button class="button" id="start" name="start"> New Round</button>
-    </table>
-
+    <div id="buttons">
+        <table id="game-buttons" class="button-table">
+            <tr>
+                <!--buttons go here. some need to disappear when clicked. left side action buttons-->
+                <td> <button class="button" id="x2" name="x2">DOUBLE DOWN</button> </td>
+            </tr>
+            <tr>
+                <td><button class="button" id="deal" name="deal">DEAL</button>
+                    <button class="button" id="hit" name="hit">HIT</button>
+                    <button class="button" id="stay" name="stay">STAY</button>
+                </td>
+            </tr>
+        </table>
+    </div>
 
     <br>
-    <p id='message'> you cant see me</p>
-    <p id='scoreBoard'>scores kept here</p>
-    <p id='money'>your money goes here</p>
 
-    <table id="playerTable" class="table">
-        <!-- player's hand table-->
-        <thead>
+    <div id="dealer">
+        <table id="dealer-table" class="table">
+            <!-- Dealer'shand-->
+            <thead>
+                <tr>Dealer's Hand</tr>
+            </thead>
+            <tr id="dHand">
+            </tr>
+        </table>
+    </div>
 
-            <br>
+
+    <div id='player'>
+        <table id="player-table" class="table">
+            <!-- player's hand table-->
 
             <tr>Your Hand</tr>
-        </thead>
-        <tr id="pHand">
+            <tr id="pHand">
+            </tr>
+        </table>
+    </div>
 
-        </tr>
+    <div id="score-message">
+        <p id='scoreBoard'>scores kept here</p>
+        <p id='message'> you cant see me</p>
+    </div>
+    <br>
 
-    </table>
+    <div id="score-and-betting">
+        <p id='money'>your money goes here</p>
+        <table id="bet-buttons" class="bet-button-table">
+            <tr>
+                <td><button class="betButton" id="betS" name='bet' data-num="5"> $5 </button>
+                    <button class="betButton" id="betM" name='bet' data-num="10"> $10 </button>
+                    <button class="betButton" id="betL" name='bet' data-num="50"> $50 </button>
+                </td>
+            </tr>
+            <tr>
+                <td><button class="button" id="start" name="start"> New Round</button></td>
+            </tr>
+        </table>
+    </div>
+
+
 </body>
 
 </html>

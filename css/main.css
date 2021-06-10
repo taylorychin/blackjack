@@ -1,10 +1,49 @@
 body{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr; 
     background-color : green; 
     color: white;
     font-size: 1.5em;
+    height: 100vh;
 }
 
+.card{
+    transform: scale(1.25);
+    margin-right: 30px;
+    margin-top: 10px;
+}
  button, .button{
-    font-size: 1.5em;
+    font-size: 1em;
     margin :5px 3px;
 }
+#buttons{
+    grid-column: 1;
+    grid-row: 3;
+}
+#score-and-betting{
+    font-size: 1.5em;
+    justify-content: center;
+    grid-column: 3;
+    grid-row: 3;
+}
+
+.button-table{
+    grid-column: 1;
+    grid-row: 3;
+}
+#score-message{
+    font-size: 1em;
+    grid-column: 2;
+    grid-row: 3;
+}
+
+#dealer{
+    grid-column: 2;
+    grid-row: 1;
+}
+#player {
+    grid-column: 2;
+    grid-row: 2;
+}
+
