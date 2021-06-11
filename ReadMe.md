@@ -21,7 +21,7 @@ CSS Card Library
 Javascript
 
 #Getting Started
- /// deployed game link goes here /// 
+[active link](https://taylorychin.github.io/blackjack/)
 
 The game disables buttons that should not be used. Click the buttons labled with Money icons to decide how much you would like to bet. 
 Once you have decided how much you would like to wagar click the "DEAL" button and the game starts. After receiving your hand you can choose to double down, hit, or stay. After which the dealer then plays scores are calculated and winnings are distributed.
