@@ -6,10 +6,8 @@ It plays like a regular game of blackjack with the exceptions of the split rule 
 
 
 
-![game in progress] (https://imgur.com/a/HW147mO.png)  
-
-<img src="https://imgur.com/a/HW147mO.png" alt="game in progress"
-style="height: 200px; />
+# Screen Shots
+<img src="https://imgur.com/a/HW147mO.png">
 
 # Technologies Used
 HTML  
@@ -27,7 +25,7 @@ The game disables buttons that should not be used. Click the buttons labled with
 Once you have decided how much you would like to wagar click the "DEAL" button and the game starts. After receiving your hand you can choose to double down, hit, or stay. After which the dealer then plays scores are calculated and winnings are distributed.
 Once the game ends you can choose to play another round either until you get bored or run out of funds.
 
-#Next Steps
+# Next Steps
 Given more time I would like to more closely imitate the way blackjack is played in real life. Adding the split feature as well as maintaining the deck until it gets low before reshuffling the cards.
 Things I would like to add.
 - animations: dealer's face down card turning over, cards being delt from a deck.
