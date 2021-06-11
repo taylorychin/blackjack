@@ -9,6 +9,8 @@ It plays like a regular game of blackjack with the exceptions of the split rule 
 # Screen Shots
 ![Screenshot of win screen](https://i.imgur.com/8AXrwiY.png)
 
+![logic betting buttons](https://i.imgur.com/XTpZwgu.png)
+
 # Technologies Used
 HTML  
 
@@ -19,7 +21,7 @@ CSS Card Library
 Javascript
 
 # Getting Started
-[active link](https://taylorychin.github.io/blackjack/)
+[Play Game!](https://taylorychin.github.io/blackjack/)
 
 The game disables buttons that should not be used. Click the buttons labled with Money icons to decide how much you would like to bet. 
 Once you have decided how much you would like to wagar click the "DEAL" button and the game starts. After receiving your hand you can choose to double down, hit, or stay. After which the dealer then plays scores are calculated and winnings are distributed.
