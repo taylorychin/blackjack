@@ -7,7 +7,7 @@ It plays like a regular game of blackjack with the exceptions of the split rule 
 
 
 # Screen Shots
-![Screenshot of win screen] (https://i.imgur.com/8AXrwiY.png)
+![Screenshot of win screen](https://i.imgur.com/8AXrwiY.png)
 
 # Technologies Used
 HTML  
