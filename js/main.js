@@ -5,22 +5,16 @@
 const suits = ['s', 'c', 'd', 'h'];
 const ranks = ['02', '03', '04', '05', '06', '07', '08', '09', '10', 'J', 'Q', 'K', 'A'];
 const masterDeck = buildMasterDeck();
-const betSmall = 5;
-const betMed = 10;
-const betBig = 50;
 
 /*----- app's state (variables) -----*/
 /*
 best stage : blocks betting once deal is clicked.
 first move ( blocks double down, )
 */
-let gameStage; //modulus operater this to decide where what step the game is on?
 let funds;
 let totalBet;
-let betButtons = [5, 10, 50];
-let gameStart = true;
+let betButtons;
 let outcome = null;
-
 
 /*----- cached element references -----*/
 let modifier; // changes how much you win.
@@ -33,7 +27,6 @@ let scoreBox = document.getElementById('scoreBoard');
 let messageString;
 let scoreString;
 
-
 /*----- event listeners -----*/
 //button click listeners for deal, chips, hold, hit, x2down, etc.
 document.addEventListener("click", handleButtons);
@@ -42,7 +35,7 @@ document.addEventListener("click", handleButtons);
 //setup or reset the game.
 function init() {
     totalBet = 0;
-    funds = 1000;
+    funds = 200;
     deck = masterDeck;
     shuffle(deck);
     playerHand.length = 0;
@@ -53,7 +46,6 @@ function init() {
 
     disableButtons(['hit', 'stay', 'deal', 'x2', 'start']);
 
-    gameStage = 1;
     render();
 }
 //======================================================
@@ -95,13 +87,6 @@ function dealerPlay() {
     while (checkHand(dealerHand) < 17) {
         hit(dealerHand);
     }
-
-    // if (checkHand(dealerHand) >= 17) return;
-    // setTimeout(() => {
-    //     hit(dealerHand);
-    //     render();
-    //     dealerPlay();
-    // }, 1000);
 }
 //=============================================
 function didWin() {
@@ -109,7 +94,6 @@ function didWin() {
     let pScore = checkHand(playerHand);
     let value = totalBet;
 
-    console.log(value);
 
     if ((pScore > dScore) && (pScore < 22)) {
         messageString = `YOU WIN! `;
@@ -132,40 +116,42 @@ function didWin() {
         messageString = `Tie. Nobody Wins.`;
         value = 0;
     }
-    // else if ((pScore === 21) && (playerHand.length === 2))
-    //     messageString = `BLACK JACK YOU WIN!`;
-    // value = totalBet * 1.5;
 
-
-    disableButtons(["deal", "x2", "hit", "stay", "betS", "betM", "betL"]);
+    disableButtons(["betL", "deal", "x2", "hit", "stay", "betS", "betM"]);
+    console.log("disabledDidWin");
     enableButtons(["start"]);
     render();
     totalBet = 0;
-    console.log(value);
     return (value);
 }
 //=====================================================
 function disableButtons(buttons) {
-    buttons.forEach(function (b) {
-        let test = document.getElementById(b.toString());
-        test.setAttribute('disabled', 'true');
+    let tot = 0;
+    let btn;
+    Array.from(buttons).forEach(function (b) {
+        btn = document.getElementById(b);
+        btn.disabled = true;
+        console.log(btn);
+
     });
 }
 //=========================================================
 function enableButtons(buttons) {
     buttons.forEach(function (b) {
+        console.log(`d ${b}`);
         let test = document.getElementById(b);
         test.removeAttribute('disabled');
+        console.log(`enabled ${test}`);
+
     });
 }
-
+//========================================================
 function winnings(amount) {
     funds += parseInt(amount);
 }
 //========================================================
 function handleButtons(evt) {
-    if (evt.target.name === 'deal') {
-        gameStage++;
+    if (evt.target.id === 'deal') {
         hit(dealerHand);
         hit(dealerHand);
         hit(playerHand);
@@ -192,16 +178,15 @@ function handleButtons(evt) {
                 funds -= totalBet;
                 totalBet = 0;
             }
-            disableButtons(['deal', 'betS', 'betM', 'betL', 'x2', 'hit', 'stay',]);
+            totalBet = 0;
+            disableButtons(['deal', 'betS', 'betM', 'betL', 'x2', 'hit', 'stay']);
+            console.log("disabled buttons");
             enableButtons(['start']);
         }
 
-        // if (score > 21) {
-        //     winnings(didWin());
-        // }
     }
 
-    if (evt.target.name === "x2") {
+    if (evt.target.id === "x2") {
         disableButtons(["x2"]);
         totalBet *= 2;
         hit(playerHand);
@@ -209,27 +194,38 @@ function handleButtons(evt) {
         winnings(didWin());
 
     }
-
-    if (evt.target.name === 'bet') {
-        totalBet += parseInt(evt.target.dataset.num);
+    if (evt.target.id === 'betS') {
+        totalBet += parseInt(evt.target.name);
         enableButtons(['deal']);
         disableButtons(['start']);
     }
 
-    if (evt.target.name === 'hit') {
+    if (evt.target.id === 'betM') {
+        totalBet += parseInt(evt.target.name);
+        enableButtons(['deal']);
+        disableButtons(['start']);
+    }
+
+    if (evt.target.id === 'betL') {
+        totalBet += parseInt(evt.target.name);  //evt.target.dataset.num
+        enableButtons(['deal']);
+        disableButtons(['start']);
+    }
+
+
+    if (evt.target.id === 'hit') {
         hit(playerHand);
         if (parseInt(checkHand(playerHand)) >= 21) {
             winnings(didWin());
         }
     }
 
-    if (evt.target.name === 'stay') {
-        gameStage++;
+    if (evt.target.id === 'stay') {
         dealerPlay();
         winnings(didWin());
     }
 
-    if (evt.target.name === 'start') {
+    if (evt.target.id === 'start') {
         newRound();
         enableButtons(["betS", "betM", "betL",]);
         disableButtons(["start"]);
@@ -253,7 +249,8 @@ function newRound() {
     //messageBox.style.Visibility = 'hidden';
 
     if (funds < 5) {
-        messageString = `sorry you are out of money`;
+        messageString = `sorry you are out of money.`;
+        disableButtons(['betS', 'betM', 'betL']);
     }
 }
 //=============================================
@@ -264,16 +261,13 @@ function render() {
 
 
     //disable betting buttons as funds get low.
-    let buttons = document.getElementsByName('bet');
-    buttons.forEach(btn => {
-        let val = parseInt(btn.id);
+    let betButtons = document.getElementsByClassName("bet-button");
+    Array.from(betButtons).forEach(btn => {
+        let val = parseInt(btn.name);
         if (val > (funds - totalBet)) {
-            console.log(val);
-            console.log(funds);
-            btn.setAttribute('disabled', 'true');
-        } else if (val <= (funds - totalBet)) {
-            btn.removeAttribute('disabled');
+            btn.disabled = true;
         }
+
     })
     moneyBox.textContent = `Money Available: ${funds} total bet: ${totalBet} `;
 
@@ -286,17 +280,10 @@ function render() {
 //===============================================
 function renderDeckInContainer(deck, container, isDealer) {
     container.innerHTML = '';
-    // Let's build the cards as a string of HTML
     let cardsHtml = '';
     deck.forEach(function (card, i) {
         cardsHtml += `<div class="card ${isDealer && !i && totalBet ? "back" : card.face}"></div>`;
     });
-    //"back" if dealer and first card.
-    // Or, use reduce to 'reduce' the array into a single thing - in this case a string of HTML markup 
-    // const cardsHtml = deck.reduce(function(html, card) {
-    //   return html + `<div class="card ${card.face}"></div>`;
-    // }, '');
-    //cardsHtml += `<div class="card ${'back'}"></div>`;
     container.innerHTML = cardsHtml;
 }
 //==================================================

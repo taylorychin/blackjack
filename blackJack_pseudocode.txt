@@ -1,0 +1,30 @@
+Taylor Chin
+pseudo code
+project 1 blackjack
+
+1. player clicks chips on the left side up to their total money to place a bet.
+
+2. player clicks "deal" button to start the game.
+    gameState variable changes to "in progress" 
+
+3. dealer receives 1 face up card 1 face down card, player
+
+4. player receives 2 face up cards. 
+
+5. deal button changes into buttons hit, stay, and X2 for double down. 
+    "can double down" variable gets set to false. 
+
+6. player can click hit to get another card, stay to hold where they are or X2 
+    to double down. x2 goes away after initial hand.
+    When player is done dealer's hand is revealed and dealer hits until
+    card total is no longer under 17.
+
+7. Aces are counted as 11. Unless total goes over 21 then they are changed to a 
+    1 until total is under 11.  (may require multiple passes through the hand)
+
+8. if the player wins they get back 1.5x their bet, if the player loses they
+    lose their bet. if the dealer busts they get x2 their bet.
+
+9. deck, player hand, and dealer hand will all be stored in an array.
+
+10. 
