@@ -45,7 +45,6 @@ function init() {
     messageBox.style.visibility = 'hidden';
 
     disableButtons(['hit', 'stay', 'deal', 'x2', 'start']);
-
     render();
 }
 //======================================================
@@ -94,29 +93,24 @@ function didWin() {
     let pScore = checkHand(playerHand);
     let value = totalBet;
 
-
     if ((pScore > dScore) && (pScore < 22)) {
         messageString = `YOU WIN! `;
     }
     else if ((dScore > 21) && (pScore < 21)) {
         messageString = `Dealer busts. YOU WIN!`;
     }
-
     else if (dScore > pScore) {
         messageString = `You Lose`;
         value = totalBet * -1;
     }
     else if (pScore > 21) {
         messageString = `Bust. You Lose.`;
-
         value = totalBet * -1;
-
     }
     else if ((pScore === dScore) && (pScore < 21)) {
         messageString = `Tie. Nobody Wins.`;
         value = 0;
     }
-
     disableButtons(["betL", "deal", "x2", "hit", "stay", "betS", "betM"]);
     console.log("disabledDidWin");
     enableButtons(["start"]);
@@ -132,7 +126,6 @@ function disableButtons(buttons) {
         btn = document.getElementById(b);
         btn.disabled = true;
         console.log(btn);
-
     });
 }
 //=========================================================
@@ -142,7 +135,6 @@ function enableButtons(buttons) {
         let test = document.getElementById(b);
         test.removeAttribute('disabled');
         console.log(`enabled ${test}`);
-
     });
 }
 //========================================================
@@ -183,7 +175,6 @@ function handleButtons(evt) {
             console.log("disabled buttons");
             enableButtons(['start']);
         }
-
     }
 
     if (evt.target.id === "x2") {
@@ -192,7 +183,6 @@ function handleButtons(evt) {
         hit(playerHand);
         dealerPlay();
         winnings(didWin());
-
     }
     if (evt.target.id === 'betS') {
         totalBet += parseInt(evt.target.name);
@@ -211,7 +201,6 @@ function handleButtons(evt) {
         enableButtons(['deal']);
         disableButtons(['start']);
     }
-
 
     if (evt.target.id === 'hit') {
         hit(playerHand);
@@ -259,7 +248,6 @@ function render() {
     renderDeckInContainer(playerHand, pHandTable, false);
     renderDeckInContainer(dealerHand, dHandTable, true);
 
-
     //disable betting buttons as funds get low.
     let betButtons = document.getElementsByClassName("bet-button");
     Array.from(betButtons).forEach(btn => {
@@ -267,7 +255,6 @@ function render() {
         if (val > (funds - totalBet)) {
             btn.disabled = true;
         }
-
     })
     moneyBox.textContent = `Money Available: ${funds} total bet: ${totalBet} `;
 

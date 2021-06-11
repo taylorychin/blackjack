@@ -1,17 +1,17 @@
 
-#BLACK JACK
+# BLACK JACK
 This is a computerized version of the game of blackjack between a single player and a dealer. The game allows the player to play a single deck game of black jack. It allows the player to pick a betting amount with buttons and then starting the game. 
 
 It plays like a regular game of blackjack with the exceptions of the split rule and does not allow for the practice of card counting as the is reconstructed and shuffled after each hand. 
 
-/// images go here ///   
+
 
 ![game in progress] (https://imgur.com/a/HW147mO.png)  
 
 <img src="https://imgur.com/a/HW147mO.png" alt="game in progress"
 style="height: 200px; />
 
-#Technologies Used
+# Technologies Used
 HTML  
 
 CSS  
@@ -20,7 +20,7 @@ CSS Card Library
 
 Javascript
 
-#Getting Started
+# Getting Started
 [active link](https://taylorychin.github.io/blackjack/)
 
 The game disables buttons that should not be used. Click the buttons labled with Money icons to decide how much you would like to bet. 
